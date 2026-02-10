@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} - Contact Manager</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}Contact Manager</h1>
+    
+    <div style="background-color: #f0f0f0; padding: 15px;">
+        <h3>Add New Contact</h3>
+        <form action="/add" method="POST">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Add to Data Structure</button>
+        </form>
+    </div>
+
+    <div style="background-color: #e8f4f8; padding: 15px; margin-top: 15px;">
+        <h3>Search Contacts</h3>
+        <form action="/search" method="POST">
+            <input type="text" name="search_query" placeholder="Search by name or email" required>
+            <button type="submit">Search</button>
+            <a href="/" style="margin-left: 10px;"><button type="button">View All</button></a>
+        </form>
+    </div>
+    <hr>
+    <h3>{% if search_performed %}Search Results{% else %}Current Contacts (In-Memory){% endif %}</h3>
+    {% if search_performed %}
+        {% if contacts %}
+            <p style="color: green;">Found {{ contacts|length }} contact(s) matching "{{ search_query }}"</p>
+            {% for contact in contacts %}
+                <div class="card">
+                    <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="color: red;">No contacts found matching "{{ search_query }}". Please try a different search term.</p>
+        {% endif %}
+    {% else %}
+        {% for contact in contacts %}
+            <div class="card">
+                <strong>{{ contact.name }}</strong> - {{ contact.email }}
+            </div>
+        {% else %}
+            <p>No contacts found. Add your first contact above!</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
