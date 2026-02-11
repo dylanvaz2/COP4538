@@ -62,7 +62,7 @@
 
     <!-- Undo/Redo Section -->
     <div class="undo-redo-section">
-        <h3>Undo/Redo Actions (Stack & Queue)</h3>
+        <h3>Undo/Redo Actions</h3>
         <form action="/undo" method="POST" style="display: inline;">
             <button type="submit" class="undo-btn" {% if not undo_available %}disabled{% endif %}>
                 ⟲ Undo
@@ -85,7 +85,7 @@
     </div>
 
     <div style="background-color: #e8f4f8; padding: 15px; margin-top: 15px;">
-        <h3>Search Contacts (Hash Table - O(1) Lookup)</h3>
+        <h3>Search Contacts</h3>
         <form action="/search" method="POST">
             <input type="text" name="search_query" placeholder="Search by name or email" required>
             <button type="submit">Search</button>
