@@ -4,12 +4,77 @@
     <title>{{ title }} - Contact Manager</title>
     <style>
         body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .card { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+        .card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .contact-info { flex-grow: 1; }
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+        .undo-redo-section {
+            background-color: #fff3cd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .undo-btn, .redo-btn {
+            padding: 8px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+        }
+        .undo-btn {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .undo-btn:hover:enabled {
+            background-color: #ffb300;
+        }
+        .redo-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .redo-btn:hover:enabled {
+            background-color: #138496;
+        }
+        .undo-btn:disabled, .redo-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
     <h1>{{ title }}Contact Manager</h1>
-    
+
+    <!-- Undo/Redo Section -->
+    <div class="undo-redo-section">
+        <h3>Undo/Redo Actions (Stack & Queue)</h3>
+        <form action="/undo" method="POST" style="display: inline;">
+            <button type="submit" class="undo-btn" {% if not undo_available %}disabled{% endif %}>
+                ⟲ Undo
+            </button>
+        </form>
+        <form action="/redo" method="POST" style="display: inline;">
+            <button type="submit" class="redo-btn" {% if not redo_available %}disabled{% endif %}>
+                ⟳ Redo
+            </button>
+        </form>
+    </div>
+
     <div style="background-color: #f0f0f0; padding: 15px;">
         <h3>Add New Contact</h3>
         <form action="/add" method="POST">
@@ -20,7 +85,7 @@
     </div>
 
     <div style="background-color: #e8f4f8; padding: 15px; margin-top: 15px;">
-        <h3>Search Contacts</h3>
+        <h3>Search Contacts (Hash Table - O(1) Lookup)</h3>
         <form action="/search" method="POST">
             <input type="text" name="search_query" placeholder="Search by name or email" required>
             <button type="submit">Search</button>
@@ -28,13 +93,20 @@
         </form>
     </div>
     <hr>
-    <h3>{% if search_performed %}Search Results{% else %}Current Contacts (In-Memory){% endif %}</h3>
+    <h3>{% if search_performed %}Search Results{% else %}Current Contacts (LinkedList){% endif %}</h3>
     {% if search_performed %}
         {% if contacts %}
             <p style="color: green;">Found {{ contacts|length }} contact(s) matching "{{ search_query }}"</p>
             {% for contact in contacts %}
                 <div class="card">
-                    <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                    <div class="contact-info">
+                        <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                    </div>
+                    <form action="/delete" method="POST" style="margin: 0;">
+                        <input type="hidden" name="name" value="{{ contact.name }}">
+                        <input type="hidden" name="email" value="{{ contact.email }}">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Delete this contact?');">Delete</button>
+                    </form>
                 </div>
             {% endfor %}
         {% else %}
@@ -43,7 +115,14 @@
     {% else %}
         {% for contact in contacts %}
             <div class="card">
-                <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                <div class="contact-info">
+                    <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                </div>
+                <form action="/delete" method="POST" style="margin: 0;">
+                    <input type="hidden" name="name" value="{{ contact.name }}">
+                    <input type="hidden" name="email" value="{{ contact.email }}">
+                    <button type="submit" class="delete-btn" onclick="return confirm('Delete this contact?');">Delete</button>
+                </form>
             </div>
         {% else %}
             <p>No contacts found. Add your first contact above!</p>
