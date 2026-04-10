@@ -1,60 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }} - Contact Manager</title>
+    <title>{{ title }}Contact Manager</title>
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        body { font-family: sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        /* --- Cards --- */
         .card {
             border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 10px 15px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: 4px;
+            background: #fff;
         }
         .contact-info { flex-grow: 1; }
-        .delete-btn {
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            cursor: pointer;
-            border-radius: 3px;
+        .contact-meta { font-size: 0.8em; color: #666; margin-top: 2px; }
+        .badge {
+            display: inline-block;
+            font-size: 0.7em;
+            padding: 2px 7px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
         }
-        .delete-btn:hover {
-            background-color: #cc0000;
-        }
-        .undo-redo-section {
-            background-color: #fff3cd;
+        .badge-vip  { background: #ffd700; color: #333; font-weight: bold; }
+        .badge-cat  { background: #e0e0e0; color: #333; }
+
+        /* --- VIP Section --- */
+        .vip-section {
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
             padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
+        .vip-section h2 { margin: 0 0 12px; color: #e65100; font-size: 1.1em; }
+        .vip-priority { font-weight: bold; color: #e65100; margin-left: 8px; }
+
+        /* --- Category Tree --- */
+        .category-tree {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .category-tree h2 { margin: 0 0 10px; font-size: 1.1em; color: #333; }
+        .cat-node { margin-bottom: 10px; }
+        .cat-label {
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #495057;
+            font-size: 0.95em;
+        }
+        .dept-node { margin-left: 20px; color: #666; font-size: 0.9em; }
+        .team-node { margin-left: 40px; color: #888; font-size: 0.85em; }
+        .tree-contact { margin-left: 60px; font-size: 0.85em; color: #333; }
+
+        /* --- Forms --- */
+        .add-section {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .add-section h3 { margin: 0 0 10px; }
+        .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+        .form-row input, .form-row select { padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-row input[type=text], .form-row input[type=email] { flex: 1; min-width: 140px; }
+        .form-row select { min-width: 120px; }
+        .vip-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .priority-field { display: none; align-items: center; gap: 6px; }
+        .priority-field.visible { display: flex; }
+
+        /* --- Search --- */
+        .search-section {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .search-section h3 { margin: 0 0 10px; }
+
+        /* --- Undo/Redo --- */
+        .undo-redo-section {
+            background: #fff3cd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .undo-redo-section h3 { margin: 0 0 8px; }
         .undo-btn, .redo-btn {
-            padding: 8px 20px;
-            margin-right: 10px;
+            padding: 7px 18px;
+            margin-right: 8px;
             cursor: pointer;
             border: none;
+            border-radius: 4px;
+        }
+        .undo-btn { background: #ffc107; color: #000; }
+        .redo-btn { background: #17a2b8; color: #fff; }
+        .undo-btn:hover:enabled { background: #ffb300; }
+        .redo-btn:hover:enabled { background: #138496; }
+        .undo-btn:disabled, .redo-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* --- Delete button --- */
+        .delete-btn {
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            padding: 5px 13px;
+            cursor: pointer;
             border-radius: 3px;
         }
-        .undo-btn {
-            background-color: #ffc107;
-            color: #000;
+        .delete-btn:hover { background: #cc0000; }
+
+        /* --- Submit button --- */
+        .submit-btn {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 7px 18px;
+            cursor: pointer;
+            border-radius: 4px;
         }
-        .undo-btn:hover:enabled {
-            background-color: #ffb300;
-        }
-        .redo-btn {
-            background-color: #17a2b8;
-            color: white;
-        }
-        .redo-btn:hover:enabled {
-            background-color: #138496;
-        }
-        .undo-btn:disabled, .redo-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        .submit-btn:hover { background: #218838; }
+
+        hr { border: none; border-top: 1px solid #dee2e6; margin: 20px 0; }
     </style>
 </head>
 <body>
@@ -63,70 +137,176 @@
     <!-- Undo/Redo Section -->
     <div class="undo-redo-section">
         <h3>Undo/Redo Actions</h3>
-        <form action="/undo" method="POST" style="display: inline;">
-            <button type="submit" class="undo-btn" {% if not undo_available %}disabled{% endif %}>
-                ⟲ Undo
-            </button>
+        <form action="/undo" method="POST" style="display:inline;">
+            <button type="submit" class="undo-btn" {% if not undo_available %}disabled{% endif %}>⟲ Undo</button>
         </form>
-        <form action="/redo" method="POST" style="display: inline;">
-            <button type="submit" class="redo-btn" {% if not redo_available %}disabled{% endif %}>
-                ⟳ Redo
-            </button>
+        <form action="/redo" method="POST" style="display:inline;">
+            <button type="submit" class="redo-btn" {% if not redo_available %}disabled{% endif %}>⟳ Redo</button>
         </form>
     </div>
 
-    <div style="background-color: #f0f0f0; padding: 15px;">
+    {% if not search_performed %}
+
+    <!-- VIP Contacts (Heap Priority Queue) -->
+    {% if vip_contacts %}
+    <div class="vip-section">
+        <h2>⭐ VIP Contacts — Priority Queue (Heap)</h2>
+        {% for contact in vip_contacts %}
+        <div class="card" style="border-color: #ffc107;">
+            <div class="contact-info">
+                <strong>{{ contact.name }}</strong>
+                <span class="badge badge-vip">VIP</span>
+                <span class="vip-priority">Priority {{ contact.priority }}/10</span>
+                <span class="badge badge-cat">{{ contact.category | capitalize }}</span>
+                - {{ contact.email }}
+                <div class="contact-meta">
+                    {% if contact.department %}Dept: {{ contact.department }}{% endif %}
+                    {% if contact.team %} &bull; Team: {{ contact.team }}{% endif %}
+                </div>
+            </div>
+            <form action="/delete" method="POST" style="margin:0;">
+                <input type="hidden" name="name" value="{{ contact.name }}">
+                <input type="hidden" name="email" value="{{ contact.email }}">
+                <button type="submit" class="delete-btn" onclick="return confirm('Delete {{ contact.name }}?');">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Category Tree (Binary Search Tree) -->
+    {% if category_tree %}
+    <div class="category-tree">
+        <h2>Category Tree (Binary Search Tree)</h2>
+        {% for cat_node in category_tree %}
+        <div class="cat-node">
+            <div class="cat-label">📁 {{ cat_node.category | capitalize }}</div>
+            {% for dept, teams in cat_node.departments.items() %}
+            <div class="dept-node">🏢 {{ dept }}</div>
+            {% for team, members in teams.items() %}
+            <div class="team-node">👥 {{ team }}</div>
+            {% for c in members %}
+            <div class="tree-contact">
+                &rarr; <strong>{{ c.name }}</strong> ({{ c.email }})
+                {% if c.is_vip %}<span class="badge badge-vip">VIP</span>{% endif %}
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% endif %}
+
+    <!-- Add New Contact -->
+    <div class="add-section">
         <h3>Add New Contact</h3>
         <form action="/add" method="POST">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <button type="submit">Add to Data Structure</button>
+            <div class="form-row">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <select name="category">
+                    <option value="general">General</option>
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="family">Family</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="text" name="department" placeholder="Department (optional)">
+                <input type="text" name="team" placeholder="Team (optional)">
+            </div>
+            <div class="vip-row">
+                <label>
+                    <input type="checkbox" name="is_vip" id="vip-check" onchange="togglePriority(this)">
+                    Mark as VIP
+                </label>
+                <div class="priority-field" id="priority-field">
+                    <label for="priority-input">Priority (1–10):</label>
+                    <input type="number" name="priority" id="priority-input" min="1" max="10" value="5" style="width:60px;">
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Add Contact</button>
         </form>
     </div>
 
-    <div style="background-color: #e8f4f8; padding: 15px; margin-top: 15px;">
+    <!-- Search -->
+    <div class="search-section">
         <h3>Search Contacts</h3>
         <form action="/search" method="POST">
-            <input type="text" name="search_query" placeholder="Search by name or email" required>
-            <button type="submit">Search</button>
-            <a href="/" style="margin-left: 10px;"><button type="button">View All</button></a>
+            <input type="text" name="search_query" placeholder="Search by name or email"
+                   value="{% if search_performed %}{{ search_query }}{% endif %}" required>
+            <button type="submit" style="padding:6px 14px; cursor:pointer;">Search</button>
+            <a href="/"><button type="button" style="padding:6px 14px; cursor:pointer; margin-left:8px;">View All</button></a>
         </form>
     </div>
+
     <hr>
-    <h3>{% if search_performed %}Search Results{% else %}Current Contacts (LinkedList){% endif %}</h3>
+
+    <!-- Contact list -->
+    <h3>{% if search_performed %}Search Results{% else %}All Contacts{% endif %}</h3>
+
     {% if search_performed %}
-        {% if contacts %}
-            <p style="color: green;">Found {{ contacts|length }} contact(s) matching "{{ search_query }}"</p>
-            {% for contact in contacts %}
-                <div class="card">
-                    <div class="contact-info">
-                        <strong>{{ contact.name }}</strong> - {{ contact.email }}
-                    </div>
-                    <form action="/delete" method="POST" style="margin: 0;">
-                        <input type="hidden" name="name" value="{{ contact.name }}">
-                        <input type="hidden" name="email" value="{{ contact.email }}">
-                        <button type="submit" class="delete-btn" onclick="return confirm('Delete this contact?');">Delete</button>
-                    </form>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p style="color: red;">No contacts found matching "{{ search_query }}". Please try a different search term.</p>
-        {% endif %}
-    {% else %}
-        {% for contact in contacts %}
+        {% if regular_contacts %}
+            <p style="color:green;">Found {{ regular_contacts|length }} contact(s) matching "{{ search_query }}"</p>
+            {% for contact in regular_contacts %}
             <div class="card">
                 <div class="contact-info">
-                    <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                    <strong>{{ contact.name }}</strong>
+                    {% if contact.is_vip %}<span class="badge badge-vip">VIP {{ contact.priority }}</span>{% endif %}
+                    <span class="badge badge-cat">{{ contact.category | capitalize }}</span>
+                    - {{ contact.email }}
+                    <div class="contact-meta">
+                        {% if contact.department %}Dept: {{ contact.department }}{% endif %}
+                        {% if contact.team %} &bull; Team: {{ contact.team }}{% endif %}
+                    </div>
                 </div>
-                <form action="/delete" method="POST" style="margin: 0;">
+                <form action="/delete" method="POST" style="margin:0;">
                     <input type="hidden" name="name" value="{{ contact.name }}">
                     <input type="hidden" name="email" value="{{ contact.email }}">
-                    <button type="submit" class="delete-btn" onclick="return confirm('Delete this contact?');">Delete</button>
+                    <button type="submit" class="delete-btn" onclick="return confirm('Delete {{ contact.name }}?');">Delete</button>
                 </form>
             </div>
+            {% endfor %}
         {% else %}
-            <p>No contacts found. Add your first contact above!</p>
-        {% endfor %}
+            <p style="color:red;">No contacts found matching "{{ search_query }}".</p>
+        {% endif %}
+
+    {% else %}
+        {% if regular_contacts %}
+            {% for contact in regular_contacts %}
+            <div class="card">
+                <div class="contact-info">
+                    <strong>{{ contact.name }}</strong>
+                    <span class="badge badge-cat">{{ contact.category | capitalize }}</span>
+                    - {{ contact.email }}
+                    <div class="contact-meta">
+                        {% if contact.department %}Dept: {{ contact.department }}{% endif %}
+                        {% if contact.team %} &bull; Team: {{ contact.team }}{% endif %}
+                    </div>
+                </div>
+                <form action="/delete" method="POST" style="margin:0;">
+                    <input type="hidden" name="name" value="{{ contact.name }}">
+                    <input type="hidden" name="email" value="{{ contact.email }}">
+                    <button type="submit" class="delete-btn" onclick="return confirm('Delete {{ contact.name }}?');">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        {% else %}
+            {% if not vip_contacts %}
+            <p>No contacts yet. Add your first contact above!</p>
+            {% endif %}
+        {% endif %}
     {% endif %}
+
+    <script>
+        function togglePriority(checkbox) {
+            const field = document.getElementById('priority-field');
+            field.classList.toggle('visible', checkbox.checked);
+        }
+    </script>
 </body>
 </html>
