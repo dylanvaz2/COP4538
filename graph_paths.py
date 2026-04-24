@@ -9,7 +9,7 @@ from collections import deque
 import heapq
 
 # Unweighted graph adjacency list
-unweighted_graph = {
+BFS_Graph = {
     "A": ["B", "D", "L"],
     "B": ["A", "C", "L"],
     "C": ["B", "E", "F", "D"],
@@ -27,7 +27,7 @@ unweighted_graph = {
 }
 
 # Weighted graph adjacency list with weights as list of tuples
-weighted_graph = {
+dijkstra_graph = {
     "A": [("B", 15), ("D", 12), ("L", 10)],
     "B": [("A", 15), ("C", 1), ("L", 8)],
     "C": [("B", 1), ("D", 10), ("E", 17), ("F", 25)],
@@ -123,7 +123,7 @@ def dijkstra_cheapest_path(graph, start, end):
 
 if __name__ == "__main__":
     print("=== Unweighted Graph: BFS Shortest Path from A to K ===")
-    bfs_shortest_path(unweighted_graph, 'A', 'K')
+    bfs_shortest_path(BFS_Graph, 'A', 'K')
 
     print("\n=== Weighted Graph: Dijkstra Cheapest Path from A to K ===")
-    dijkstra_cheapest_path(weighted_graph, 'A', 'K')
+    dijkstra_cheapest_path(dijkstra_graph, 'A', 'K')
