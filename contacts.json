@@ -1,26 +1,312 @@
 [
   {
+    "id": 1,
     "name": "number2",
-    "email": "numeb2@gmail.com"
+    "email": "numeb2@gmail.com",
+    "category": "general",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
   },
   {
+    "id": 2,
     "name": "form",
-    "email": "email@email.com"
+    "email": "email@email.com",
+    "category": "general",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
   },
   {
+    "id": 3,
     "name": "class",
-    "email": "class@cop.com"
+    "email": "class@cop.com",
+    "category": "general",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
   },
   {
+    "id": 4,
     "name": "doil",
-    "email": "test@test.com"
+    "email": "test@test.com",
+    "category": "general",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
   },
   {
+    "id": 5,
     "name": "mark",
-    "email": "markus45@yahoo.com"
+    "email": "markus45@yahoo.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Backend",
+    "is_vip": false,
+    "priority": 1
   },
   {
+    "id": 6,
     "name": "newtact",
-    "email": "nasim23@hotmail.com"
+    "email": "nasim23@hotmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 7,
+    "name": "Alice Hartman",
+    "email": "alice.hartman@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Backend",
+    "is_vip": true,
+    "priority": 9
+  },
+  {
+    "id": 8,
+    "name": "Brian Okonkwo",
+    "email": "b.okonkwo@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Frontend",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 9,
+    "name": "Carmen Vega",
+    "email": "carmen.vega@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Frontend",
+    "is_vip": true,
+    "priority": 7
+  },
+  {
+    "id": 10,
+    "name": "David Schreiber",
+    "email": "d.schreiber@techcorp.com",
+    "category": "work",
+    "department": "Sales",
+    "team": "Enterprise",
+    "is_vip": true,
+    "priority": 10
+  },
+  {
+    "id": 11,
+    "name": "Elena Morozova",
+    "email": "elena.m@techcorp.com",
+    "category": "work",
+    "department": "Sales",
+    "team": "SMB",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 12,
+    "name": "Felix Nguyen",
+    "email": "felix.nguyen@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Backend",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 13,
+    "name": "Grace Adeyemi",
+    "email": "grace.adeyemi@techcorp.com",
+    "category": "work",
+    "department": "HR",
+    "team": "Recruiting",
+    "is_vip": true,
+    "priority": 8
+  },
+  {
+    "id": 14,
+    "name": "Henry Kowalski",
+    "email": "henry.k@personalmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 15,
+    "name": "Isabella Ferreira",
+    "email": "isa.ferreira@gmail.com",
+    "category": "family",
+    "department": "",
+    "team": "",
+    "is_vip": true,
+    "priority": 10
+  },
+  {
+    "id": 16,
+    "name": "James Thornton",
+    "email": "j.thornton@consulting.io",
+    "category": "work",
+    "department": "Sales",
+    "team": "Enterprise",
+    "is_vip": true,
+    "priority": 9
+  },
+  {
+    "id": 17,
+    "name": "Kira Delacroix",
+    "email": "kira.d@gmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 18,
+    "name": "Liam Osei",
+    "email": "liam.osei@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "DevOps",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 19,
+    "name": "Maya Patel",
+    "email": "maya.patel@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "DevOps",
+    "is_vip": true,
+    "priority": 8
+  },
+  {
+    "id": 20,
+    "name": "Noah Lindqvist",
+    "email": "noah.l@personalmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 21,
+    "name": "Olivia Chambers",
+    "email": "o.chambers@techcorp.com",
+    "category": "work",
+    "department": "HR",
+    "team": "Benefits",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 22,
+    "name": "Pedro Alvarado",
+    "email": "pedro.alvarado@outlook.com",
+    "category": "family",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 23,
+    "name": "Quinn Rafferty",
+    "email": "q.rafferty@techcorp.com",
+    "category": "work",
+    "department": "Sales",
+    "team": "SMB",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 24,
+    "name": "Rachel Steinberg",
+    "email": "rachel.s@gmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": true,
+    "priority": 6
+  },
+  {
+    "id": 25,
+    "name": "Samuel Oduya",
+    "email": "s.oduya@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Backend",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 26,
+    "name": "Tanya Brinkworth",
+    "email": "tanya.b@techcorp.com",
+    "category": "work",
+    "department": "HR",
+    "team": "Recruiting",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 27,
+    "name": "Uma Krishnaswamy",
+    "email": "uma.k@techcorp.com",
+    "category": "work",
+    "department": "Engineering",
+    "team": "Frontend",
+    "is_vip": true,
+    "priority": 7
+  },
+  {
+    "id": 28,
+    "name": "Victor Halvorsen",
+    "email": "victor.h@personalmail.com",
+    "category": "personal",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 29,
+    "name": "Wendy Castillo",
+    "email": "wendy.castillo@outlook.com",
+    "category": "family",
+    "department": "",
+    "team": "",
+    "is_vip": true,
+    "priority": 9
+  },
+  {
+    "id": 30,
+    "name": "Xander Mukherjee",
+    "email": "x.mukherjee@techcorp.com",
+    "category": "work",
+    "department": "Sales",
+    "team": "Enterprise",
+    "is_vip": false,
+    "priority": 1
+  },
+  {
+    "id": 31,
+    "name": "Yara Hoffman",
+    "email": "yara.h@gmail.com",
+    "category": "other",
+    "department": "",
+    "team": "",
+    "is_vip": false,
+    "priority": 1
   }
 ]
